@@ -1,9 +1,22 @@
 package bohnanza;
 
-import java.util.Vector;
+import java.util.List;
 
 public class Pile {
-	public Game _unnamed_Game_;
-	public Vector<Card> _unnamed_Card_ = new Vector<Card>();
-	public Player _unnamed_Player_;
+
+	private List<Card> listOfCards;
+	private int maxNumOfCards;
+
+	public Card pop() {
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param Card
+	 */
+	public void push(int Card) {
+		throw new UnsupportedOperationException();
+	}
+
 }

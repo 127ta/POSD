@@ -1,0 +1,6 @@
+package bohnanza;
+
+public enum State {
+	PLANT, DRAWTRADEDONATE, PLANTTRADEDONATED, DRAWNEW, INACTIVE
+
+}
