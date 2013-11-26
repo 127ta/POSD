@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Pile {
 
-	private List<Card> listOfCards;
+	public List<Card> listOfCards;
 	private int maxNumOfCards;
 
 	public Pile()

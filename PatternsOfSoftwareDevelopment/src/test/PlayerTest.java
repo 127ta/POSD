@@ -18,41 +18,41 @@ public class PlayerTest {
 	public void setUp() throws Exception {
 		player = new Player();
 		playerTwo = new Player();
-		player.coins = 4;
-		player.beanFields.add(new BeanField());
-		player.beanFields.add(new BeanField());
+		player.setCoins(4);
+		player.addBeanField(new BeanField());
+		player.addBeanField(new BeanField());
 	}
 
 	@Test
 	public void testPlant() {
-		player.plant(player.beanFields.get(0));
-		assertEquals(player.beanFields.get(0).getType(), BeanType.BLACKEYED);
+		player.plant(player.getBeanFieldById(0));
+		assertEquals(player.getBeanFieldById(0).getBeanType(), BeanType.BLACKEYED);
 	}
 
 	@Test
 	public void testNextState() {
 		player.nextState();
-		assertEquals(player.playState, State.PLANT);
+		assertEquals(player.getPlayState(), State.PLANT);
 	}
 
 	@Test
 	public void testTrade() {
 		player.trade(playerTwo);
-		assertEquals(playerTwo.hand.listOfCards.get(0).getBeanType(), BeanType.BLACKEYED);
-		assertEquals(player.hand.listOfCards.size(), 0);
+		assertEquals(playerTwo.getHand().listOfCards.get(0).getBeanType(), BeanType.BLACKEYED);
+		assertEquals(player.getHand().listOfCards.size(), 0);
 	}
 	
 	@Test
 	public void testHarvest() {
-		player.harvest(player.beanFields.get(0));
-		assertEquals(player.beanFields.size(), 1);
-		assertEquals(player.coins, 5);
+		player.harvest(player.getBeanFields().get(0));
+		assertEquals(player.getBeanFields().get(0).listOfCards.size(), 0);
+		assertEquals(player.getCoins(), 5);
 	}
 
 	@Test
 	public void testBuyThirdField() {
 		player.buyThirdField();
-		assertEquals(player.beanFields.size(), 3);
-		assertEquals(player.coins, 1);
+		assertEquals(player.getBeanFields().size(), 3);
+		assertEquals(player.getCoins(), 1);
 	}
 }
