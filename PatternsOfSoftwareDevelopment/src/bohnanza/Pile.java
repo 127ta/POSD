@@ -1,5 +1,7 @@
 package bohnanza;
+import bohnanza.Card;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pile {
@@ -7,16 +9,20 @@ public class Pile {
 	private List<Card> listOfCards;
 	private int maxNumOfCards;
 
+	public Pile()
+	{
+		listOfCards = new ArrayList<Card>();
+	}
 	public Card pop() {
-		throw new UnsupportedOperationException();
+		return new Card(BeanType.BLACKEYED);
 	}
 
 	/**
 	 * 
 	 * @param Card
 	 */
-	public void push(int Card) {
-		throw new UnsupportedOperationException();
+	public void push(Card card) {
+		listOfCards.add(card);
 	}
 
 }

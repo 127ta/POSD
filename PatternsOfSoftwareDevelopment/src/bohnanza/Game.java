@@ -21,7 +21,7 @@ public class Game {
 	 * 
 	 * @param String
 	 */
-	public void main(int[] String) {
+	public static void main(String args[]) {
 		throw new UnsupportedOperationException();
 	}
 

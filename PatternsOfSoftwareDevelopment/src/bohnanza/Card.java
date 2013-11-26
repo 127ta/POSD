@@ -8,8 +8,12 @@ public class Card {
 	private BeanType type;
 	public Pile _unnamed_Pile_;
 
-	public Card() {
-		throw new UnsupportedOperationException();
+	public Card(BeanType type) {
+		this.type = type;
+	}
+	public BeanType getBeanType()
+	{
+		return type;
 	}
 
 }
