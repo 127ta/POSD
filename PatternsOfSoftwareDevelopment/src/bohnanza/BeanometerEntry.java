@@ -9,5 +9,13 @@ public class BeanometerEntry {
 		cardsNecessary = _cardsNecessary;
 		profit = _profit;
 	}
+	
+	public int getCardsNecessary(){
+		return cardsNecessary;
+	}
+	
+	public int getProfit(){
+		return profit;
+	}
 
 }

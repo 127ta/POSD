@@ -16,43 +16,61 @@ public class PlayerTest {
 	
 	@Before
 	public void setUp() throws Exception {
+		// this method is called before EACH test
 		player = new Player();
 		playerTwo = new Player();
-		player.setCoins(4);
+		
+		player.getHand().push(new Card(BeanType.COCOA));
+		player.getTradeArea().push(new Card(BeanType.BLACKEYED));
+		playerTwo.getHand().push(new Card(BeanType.COFFEE));
 		player.addBeanField(new BeanField());
 		player.addBeanField(new BeanField());
+		
+		for(int i = 0; i < 8; i++){
+			player.getBeanFieldById(0).push(new Card(BeanType.BLUE));
+			player.getTreasury().push(new Card(BeanType.STINK));
+		}
 	}
 
 	@Test
 	public void testPlant() {
-		player.plant(player.getBeanFieldById(0));
-		assertEquals(player.getBeanFieldById(0).getBeanType(), BeanType.BLACKEYED);
+		// Test planting on an empty beanfield
+		player.plant(player.getBeanFieldById(1));
+		assertEquals(player.getBeanFieldById(1).listOfCards.get(player.getBeanFieldById(1).listOfCards.size()-1).getBeanType(), BeanType.COCOA);
 	}
 
 	@Test
 	public void testNextState() {
+		// Test for incrementing playState, initially player starts in State.INACTIVE
 		player.nextState();
 		assertEquals(player.getPlayState(), State.PLANT);
 	}
 
 	@Test
 	public void testTrade() {
-		player.trade(playerTwo);
-		assertEquals(playerTwo.getHand().listOfCards.get(0).getBeanType(), BeanType.BLACKEYED);
-		assertEquals(player.getHand().listOfCards.size(), 0);
+		// Test trading between two players, check last cards in both players hands
+		player.trade(playerTwo, 0, 0);
+		assertEquals(playerTwo.getHand().listOfCards.get(playerTwo.getHand().listOfCards.size() - 1).getBeanType(), BeanType.BLACKEYED);
+		assertEquals(player.getHand().listOfCards.get(player.getHand().listOfCards.size() - 1).getBeanType(), BeanType.COFFEE);
 	}
 	
 	@Test
 	public void testHarvest() {
-		player.harvest(player.getBeanFields().get(0));
-		assertEquals(player.getBeanFields().get(0).listOfCards.size(), 0);
-		assertEquals(player.getCoins(), 5);
+		// Test harvesting of a beanfield, arbitrary beanometer was created in Card initializer
+		player.harvest(player.getBeanFieldById(0));
+		assertEquals(player.getBeanFieldById(0).listOfCards.size(), 0);
+		assertEquals(player.getCoins(), 10);
 	}
 
 	@Test
 	public void testBuyThirdField() {
+		// Attempt to purchase a third beanfield twice
 		player.buyThirdField();
 		assertEquals(player.getBeanFields().size(), 3);
-		assertEquals(player.getCoins(), 1);
+		assertEquals(player.getCoins(), 5);
+		
+		player.buyThirdField();
+		assertEquals(player.getBeanFields().size(), 3);
+		assertEquals(player.getCoins(), 5);
 	}
 }
