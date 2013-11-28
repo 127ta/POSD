@@ -134,9 +134,4 @@ public class Player {
 	public Pile getTreasury() {
 		return treasury;
 	}
-	
-	public Pile getHand()
-	{
-		return hand;
-	}
 }
