@@ -28,7 +28,6 @@ public class PlayerTest {
 		
 		for(int i = 0; i < 8; i++){
 			player.getBeanFieldById(0).push(new Card(BeanType.BLUE));
-			player.getTreasury().push(new Card(BeanType.STINK));
 		}
 	}
 
@@ -59,18 +58,28 @@ public class PlayerTest {
 		// Test harvesting of a beanfield, arbitrary beanometer was created in Card initializer
 		player.harvest(player.getBeanFieldById(0));
 		assertEquals(player.getBeanFieldById(0).listOfCards.size(), 0);
-		assertEquals(player.getCoins(), 10);
+		assertEquals(player.getCoins(), 2);
 	}
 
 	@Test
 	public void testBuyThirdField() {
+		// not enough coins
+		player.buyThirdField();
+		assertEquals(player.getBeanFields().size(), 2);
+		assertEquals(player.getCoins(), 0);
+		
+		// add enough coins
+		for(int i = 0  ; i<5; i++){
+			player.getTreasury().push(new Card(BeanType.STINK));
+		}
+		// legit purchase
+		player.buyThirdField();
+		assertEquals(player.getBeanFields().size(), 3);
+		assertEquals(player.getCoins(), 2);
+		
 		// Attempt to purchase a third beanfield twice
 		player.buyThirdField();
 		assertEquals(player.getBeanFields().size(), 3);
-		assertEquals(player.getCoins(), 5);
-		
-		player.buyThirdField();
-		assertEquals(player.getBeanFields().size(), 3);
-		assertEquals(player.getCoins(), 5);
+		assertEquals(player.getCoins(), 2);
 	}
 }
