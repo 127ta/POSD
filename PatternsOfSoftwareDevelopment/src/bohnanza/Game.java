@@ -1,5 +1,6 @@
 package bohnanza;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -9,7 +10,6 @@ public class Game {
 	private int numOfBeanCards;
 	private List<Player> players;
 	private Player activePlayer;
-	private GameRules rules;
 	private Pile drawPile;
 	private Pile discardPile;
 	private Pile deck;
@@ -21,16 +21,28 @@ public class Game {
 	 * 
 	 * @param String
 	 */
-	public void main(int[] String) {
+	public static void main(String args[]) {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param Int
-	 */
-	public void initialize(int Int) {
-		throw new UnsupportedOperationException();
+	public void initialize(int numOfPlayers) 
+	{
+		maxPlayers = GameRules.MAXPLAYERS;
+		minPlayers = GameRules.MINPLAYERS;
+		numOfBeanCards = GameRules.NUMOFBEANCARDS;
+		drawDeckExhaust = GameRules.NUMOFDRAWDECKEXHAUST;
+		maxNumOfCardsInHand = GameRules.MAXNUMOFCARDSINHAND;
+		
+		players = new ArrayList<Player>();
+		for(int i = 0; i < numOfPlayers; i++)
+		{
+			players.add(new Player());
+		}
+		
+		drawDeckShuffles = 0;
+		drawPile = new Pile();
+		discardPile = new Pile();
+		deck = new Pile();
 	}
 
 	/**
@@ -38,11 +50,18 @@ public class Game {
 	 * @param Pile
 	 */
 	public Pile shuffle(int Pile) {
-		throw new UnsupportedOperationException();
+		return new Pile();
 	}
 
-	public Pile deal() {
-		throw new UnsupportedOperationException();
-	}
+	public void deal() {
 
+	}
+	public List<Player> getListOfPlayers()
+	{
+		return players;
+	}
+	public void pushToDeck(Card card)
+	{
+		
+	}
 }

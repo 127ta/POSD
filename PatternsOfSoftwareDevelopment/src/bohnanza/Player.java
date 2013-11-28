@@ -45,5 +45,9 @@ public class Player {
 	public void buyThirdField() {
 		throw new UnsupportedOperationException();
 	}
-
+	
+	public Pile getHand()
+	{
+		return hand;
+	}
 }
