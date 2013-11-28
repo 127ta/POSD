@@ -37,6 +37,7 @@ public class Game {
 		for(int i = 0; i < numOfPlayers; i++)
 		{
 			players.add(new Player());
+			
 		}
 		
 		drawDeckShuffles = 0;
@@ -54,7 +55,11 @@ public class Game {
 	}
 
 	public void deal() {
-
+		for(int i = 0  ; i <players.size();i++){
+			for(int y = 0 ; y < maxNumOfCardsInHand; y++){
+				players.get(i).getHand().push(deck.pop());
+			}
+		}
 	}
 	public List<Player> getListOfPlayers()
 	{
@@ -62,6 +67,6 @@ public class Game {
 	}
 	public void pushToDeck(Card card)
 	{
-		
+		deck.push(card);
 	}
 }

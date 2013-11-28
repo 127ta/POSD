@@ -30,6 +30,7 @@ public class GameTest {
 		{
 			game.pushToDeck(new Card(BeanType.RED));
 		}
+		game.deal();
 	}
 
 	@Test
