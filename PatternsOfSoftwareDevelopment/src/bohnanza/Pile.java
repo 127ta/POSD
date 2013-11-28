@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Pile {
 
-	private List<Card> listOfCards;
+	public List<Card> listOfCards;
 	private int maxNumOfCards;
 
 	public Pile()
@@ -14,7 +14,9 @@ public class Pile {
 		listOfCards = new ArrayList<Card>();
 	}
 	public Card pop() {
-		return new Card(BeanType.BLACKEYED);
+		// not sure if this works
+		Card temp = listOfCards.remove(0);
+		return temp;
 	}
 
 	/**

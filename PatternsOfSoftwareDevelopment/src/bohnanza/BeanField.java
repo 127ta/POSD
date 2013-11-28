@@ -8,4 +8,15 @@ public class BeanField extends Pile {
 		return 0;
 	}
 
+	public BeanType getBeanType() {
+		return type;
+	}
+	
+	public void push(Card card) {
+		listOfCards.add(card);
+		if(listOfCards.size() == 1){
+			type = card.getBeanType();
+		}
+	}
+
 }
