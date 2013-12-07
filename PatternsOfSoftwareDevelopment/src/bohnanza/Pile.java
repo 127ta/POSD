@@ -26,5 +26,9 @@ public class Pile {
 	public void push(Card card) {
 		listOfCards.add(card);
 	}
+	
+	public List<Card> getListOfCards(){
+		return listOfCards;
+	}
 
 }

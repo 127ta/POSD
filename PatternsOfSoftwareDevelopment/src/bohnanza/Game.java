@@ -69,4 +69,76 @@ public class Game {
 	{
 		deck.push(card);
 	}
+	
+	/**
+	 * Walks through the Bohnanza game logic for current state.
+	 * 
+	 */
+	
+	/*
+	public void Play(){
+		// PLANT, DRAWTRADEDONATE, PLANTTRADEDONATED, DRAWNEW, INACTIVE
+		switch(playState){
+			case PLANT:
+				boolean type = false;
+				for(int i = 0; i < getBeanFields().size(); i++){
+					if(hand.getListOfCards().get(0).getBeanType() == getBeanFieldById(i).getBeanType()){
+						type = true;
+					}
+				}
+				
+				if(type){
+					// prompt the player to select in which beanfield he wishes to plant the next card
+					
+				} else {
+					// prompt the player to select which beanfield he wishes to sell
+					// plant card in the now empty field
+					
+				}
+				
+				// player may choose to plant one more card
+				
+				
+				type = false;
+				for(int i = 0; i < getBeanFields().size(); i++){
+					if(hand.getListOfCards().get(0).getBeanType() == getBeanFieldById(i).getBeanType()){
+						type = true;
+					}
+				}
+				
+				if(type){
+					// prompt the player to select in which beanfield he wishes to plant the next card
+					
+				} else {
+					// prompt the player to select which beanfield he wishes to sell
+					// plant card in the now empty field
+					
+				}
+				
+				break;
+			case DRAWTRADEDONATE:
+				// push two cards to players hand (or trade area)? from the draw pile
+				
+				// prompt to trade / offer / donate, must involve active player. Must trade two fresh cards and/or cards from the rest of the hand
+				// nonactive player may only trade cards from his hand
+				
+				
+				
+				break;
+			case PLANTTRADEDONATED:
+				// all players plant cards they received in trades or donations, active player plants cards he drew and kept
+				// 3rd field may be bought
+				break;
+			case DRAWNEW:
+				// active draws 3 cards to his hand
+				
+				// turn over
+				break;
+			default:
+				break;
+		}
+		
+		System.out.println(playState);
+		nextState();
+	} */
 }

@@ -13,19 +13,20 @@ import org.junit.Test;
 
 public class PlayerTest {
 	Player player, playerTwo;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		// this method is called before EACH test
 		player = new Player();
 		playerTwo = new Player();
-		
+
 		player.getHand().push(new Card(BeanType.COCOA));
 		player.getTradeArea().push(new Card(BeanType.BLACKEYED));
 		playerTwo.getHand().push(new Card(BeanType.COFFEE));
 		player.addBeanField(new BeanField());
 		player.addBeanField(new BeanField());
-		
+		player.setPlayState(State.INACTIVE);
+
 		for(int i = 0; i < 8; i++){
 			player.getBeanFieldById(0).push(new Card(BeanType.BLUE));
 		}
@@ -33,6 +34,15 @@ public class PlayerTest {
 
 	@Test
 	public void testPlant() {
+		// test planting on a non existent beanfield
+		player.plant(player.getBeanFieldById(2));
+		assertEquals(player.getBeanFields().size(), 2);
+
+
+		// Try planting on a beanfield where planting is not allowed
+		player.plant(player.getBeanFieldById(0));
+		assertEquals(player.getBeanFieldById(0).listOfCards.get(player.getBeanFieldById(0).listOfCards.size()-1).getBeanType(), BeanType.BLUE);
+
 		// Test planting on an empty beanfield
 		player.plant(player.getBeanFieldById(1));
 		assertEquals(player.getBeanFieldById(1).listOfCards.get(player.getBeanFieldById(1).listOfCards.size()-1).getBeanType(), BeanType.COCOA);
@@ -40,9 +50,18 @@ public class PlayerTest {
 
 	@Test
 	public void testNextState() {
+		// Game states PLANT, DRAWTRADEDONATE, PLANTTRADEDONATED, DRAWNEW, INACTIVE
 		// Test for incrementing playState, initially player starts in State.INACTIVE
 		player.nextState();
 		assertEquals(player.getPlayState(), State.PLANT);
+		player.nextState();
+		assertEquals(player.getPlayState(), State.DRAWTRADEDONATE);
+		player.nextState();
+		assertEquals(player.getPlayState(), State.PLANTTRADEDONATED);
+		player.nextState();
+		assertEquals(player.getPlayState(), State.DRAWNEW);
+		player.nextState();
+		assertEquals(player.getPlayState(), State.INACTIVE);
 	}
 
 	@Test
@@ -51,13 +70,36 @@ public class PlayerTest {
 		player.trade(playerTwo, 0, 0);
 		assertEquals(playerTwo.getHand().listOfCards.get(playerTwo.getHand().listOfCards.size() - 1).getBeanType(), BeanType.BLACKEYED);
 		assertEquals(player.getHand().listOfCards.get(player.getHand().listOfCards.size() - 1).getBeanType(), BeanType.COFFEE);
+
+		// Try trading non-existant card from player
+		player.trade(playerTwo, 0, 2);
+		assertEquals(playerTwo.getHand().listOfCards.get(playerTwo.getHand().listOfCards.size() - 1).getBeanType(), BeanType.BLACKEYED);
+		assertEquals(player.getHand().listOfCards.get(player.getHand().listOfCards.size() - 1).getBeanType(), BeanType.COFFEE);
+		
+		// Try trading non-existant card from playerTwo
+		player.trade(playerTwo, 2, 0);
+		assertEquals(playerTwo.getHand().listOfCards.get(playerTwo.getHand().listOfCards.size() - 1).getBeanType(), BeanType.BLACKEYED);
+		assertEquals(player.getHand().listOfCards.get(player.getHand().listOfCards.size() - 1).getBeanType(), BeanType.COFFEE);
+
+		// Try trading with nonexistant player
+		Player temp = null;
+		player.trade(temp, 0, 2);
+		assertEquals(player.getHand().listOfCards.get(player.getHand().listOfCards.size() - 1).getBeanType(), BeanType.COFFEE);
 	}
-	
+
 	@Test
 	public void testHarvest() {
 		// Test harvesting of a beanfield, arbitrary beanometer was created in Card initializer
 		player.harvest(player.getBeanFieldById(0));
 		assertEquals(player.getBeanFieldById(0).listOfCards.size(), 0);
+		assertEquals(player.getCoins(), 2);
+		// try harvesting an empty beanField
+		player.harvest(player.getBeanFieldById(0));
+		assertEquals(player.getBeanFieldById(0).listOfCards.size(), 0);
+		assertEquals(player.getCoins(), 2);
+		// try harvesting a beanfield that doesnt exist
+		player.harvest(player.getBeanFieldById(2));
+		assertEquals(player.getBeanFields().size(), 2);
 		assertEquals(player.getCoins(), 2);
 	}
 
@@ -67,7 +109,7 @@ public class PlayerTest {
 		player.buyThirdField();
 		assertEquals(player.getBeanFields().size(), 2);
 		assertEquals(player.getCoins(), 0);
-		
+
 		// add enough coins
 		for(int i = 0  ; i<5; i++){
 			player.getTreasury().push(new Card(BeanType.STINK));
@@ -76,10 +118,12 @@ public class PlayerTest {
 		player.buyThirdField();
 		assertEquals(player.getBeanFields().size(), 3);
 		assertEquals(player.getCoins(), 2);
-		
+
 		// Attempt to purchase a third beanfield twice
 		player.buyThirdField();
 		assertEquals(player.getBeanFields().size(), 3);
 		assertEquals(player.getCoins(), 2);
 	}
+
+
 }
