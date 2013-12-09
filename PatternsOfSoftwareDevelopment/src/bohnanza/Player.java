@@ -79,12 +79,35 @@ public class Player {
 	
 
 	/**
-	 * 
-	 * @param BeanField
+	 * @require BeanField != null
+	 * @param BeanField the beanfield to harvest
 	 */
 	public void harvest(BeanField _beanField) {
+		int harvestValue = _beanField.getHarvestValue();
+		if(harvestValue > 0)
+		{
+			for(int i = 0; i < harvestValue; i++)
+			{
+				treasury.push(_beanField.pop());
+			}
+		} 
+		else 
+		{
+			System.out.println("No harvest possible! Beanfield is empty or does not contain enough cards to deliver profit.");
+		}
+		while(_beanField.listOfCards.size() > 0){ // if cards still left in the beanfield
+			_beanField.pop(); // these should be thrown to the discard pile
+		}
 		
-		if (_beanField != null && _beanField.getListOfCards().size() > 0){
+		// Update coins to reflect the new value of the entire treasury
+		coins = treasury.listOfCards.size();
+		
+		
+		
+		
+		
+		
+		/*if (_beanField != null && _beanField.getListOfCards().size() > 0){
 			Card temp = _beanField.pop(); // Get a reference card to read beanometer, read next comment
 			_beanField.push(temp);
 			
@@ -100,9 +123,8 @@ public class Player {
 				_beanField.pop(); // these should be thrown to the discard pile
 			}
 			coins = treasury.listOfCards.size(); // the player has as many coins as he has cards in his treasury	
-		} else {
-			System.out.println("No harvest! Beanfiel is empty.");
-		}
+		}*/
+		
 		
 	}
 
