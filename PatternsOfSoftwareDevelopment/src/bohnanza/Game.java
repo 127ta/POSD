@@ -62,6 +62,6 @@ public class Game {
 	}
 	public void pushToDeck(Card card)
 	{
-		
+		deck.push(card);
 	}
 }
