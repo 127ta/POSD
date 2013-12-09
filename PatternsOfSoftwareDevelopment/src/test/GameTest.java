@@ -30,6 +30,7 @@ public class GameTest {
 		{
 			game.pushToDeck(new Card(BeanType.RED));
 		}
+		game.deal();
 	}
 
 	@Test
@@ -47,21 +48,21 @@ public class GameTest {
 	@Test
 	public void testDeal() 
 	{
-		boolean allRedBeans = true;
-		boolean allBlueBeans = true;
-		boolean allStinkBeans = true;
-		boolean allSoyBeans = true;
+		boolean allRedBeans 	= true;
+		boolean allBlueBeans 	= true;
+		boolean allStinkBeans 	= true;
+		boolean allSoyBeans 	= true;
 		for(int i = 0; i < 5; i++)
 		{
-			if(allRedBeans) allRedBeans = game.getListOfPlayers().get(0).getHand().pop().getBeanType() == BeanType.RED;
-			if(allBlueBeans) allBlueBeans = game.getListOfPlayers().get(1).getHand().pop().getBeanType() == BeanType.BLUE;
-			if(allStinkBeans) allStinkBeans = game.getListOfPlayers().get(2).getHand().pop().getBeanType() == BeanType.STINK;
-			if(allSoyBeans) allSoyBeans = game.getListOfPlayers().get(3).getHand().pop().getBeanType() == BeanType.SOY;
+			if(allRedBeans) 	allRedBeans 	= game.getListOfPlayers().get(0).getHand().pop().getBeanType() == BeanType.RED;
+			if(allBlueBeans) 	allBlueBeans 	= game.getListOfPlayers().get(1).getHand().pop().getBeanType() == BeanType.BLUE;
+			if(allStinkBeans) 	allStinkBeans 	= game.getListOfPlayers().get(2).getHand().pop().getBeanType() == BeanType.STINK;
+			if(allSoyBeans) 	allSoyBeans 	= game.getListOfPlayers().get(3).getHand().pop().getBeanType() == BeanType.SOY;
 		}
-		assertEquals("After dealing, PLayer 1 should have 5 BeanType.RED cards", true, allRedBeans);
-		assertEquals("After dealing, PLayer 2 should have 5 BeanType.BLUE cards", true, allBlueBeans);
-		assertEquals("After dealing, PLayer 3 should have 5 BeanType.STINK cards", true, allStinkBeans);
-		assertEquals("After dealing, PLayer 4 should have 5 BeanType.SOY cards", true, allSoyBeans);
+		assertEquals("After dealing, PLayer 1 should have 5 BeanType.RED cards",	 true, allRedBeans);
+		assertEquals("After dealing, PLayer 2 should have 5 BeanType.BLUE cards",	 true, allBlueBeans);
+		assertEquals("After dealing, PLayer 3 should have 5 BeanType.STINK cards",	 true, allStinkBeans);
+		assertEquals("After dealing, PLayer 4 should have 5 BeanType.SOY cards",	 true, allSoyBeans);
 	}
 
 }

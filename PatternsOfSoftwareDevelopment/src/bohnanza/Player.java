@@ -12,6 +12,7 @@ public class Player {
 	private Pile hand;
 	private List<BeanField> beanFields;
 	private Pile tradeArea;
+	// add play step
 	private State playState;
 	private int coins;
 	private Pile aside;
@@ -34,12 +35,17 @@ public class Player {
 	}
 	
 	public void plant(BeanField _beanField) {
-		// if field is of the same type or no type has been specified
-		if(hand.listOfCards.get(0).getBeanType() == _beanField.getBeanType() || _beanField.getBeanType() == null){
-			_beanField.push(hand.pop());
-		} else { // Replace with throws?
-			System.out.println("Planting failed! Tried to plant " + hand.listOfCards.get(0).getBeanType() + " on a " + _beanField.getBeanType() + " beanfield.");
+		if(_beanField != null ){
+			// if field is of the same type or no type has been specified
+			if(hand.listOfCards.get(0).getBeanType() == _beanField.getBeanType() || _beanField.getBeanType() == null){
+				_beanField.push(hand.pop());
+			} else { // Replace with throws?
+				System.out.println("No plant! Tried to plant " + hand.listOfCards.get(0).getBeanType() + " on a " + _beanField.getBeanType() + " beanfield.");
+			}
+		} else {
+			System.out.println("No plant! Beanfield doesn't exist.");
 		}
+		
 		
 	}
 
@@ -54,35 +60,50 @@ public class Player {
 	public void trade(Player _player, int tradeId, int handId) {
 		// ADD BOUNDARY CHECKING! Do not trust arbitrary input from users
 		// move card from tradeArea to foreign players hand
-		_player.hand.push(this.tradeArea.listOfCards.get(tradeId));
-		this.tradeArea.listOfCards.remove(tradeId);
+		if (_player != null){
+			if(tradeId<this.tradeArea.listOfCards.size() && handId<this.hand.getListOfCards().size()){
+				_player.hand.push(this.tradeArea.listOfCards.get(tradeId));
+				this.tradeArea.listOfCards.remove(tradeId);
+				
+				// move card from foreign players hand to current players hand
+				this.hand.push(_player.hand.listOfCards.get(handId));
+				_player.hand.listOfCards.remove(handId);
+			} else {
+				System.out.println("No trade! Card Id doesn't exist.");
+			}
+		} else {
+			System.out.println("No trade! Player doesn't exist");
+		}
 		
-		// move card from foreign players hand to current players hand
-		this.hand.push(_player.hand.listOfCards.get(handId));
-		_player.hand.listOfCards.remove(handId);
 	}
+	
 
 	/**
 	 * 
 	 * @param BeanField
 	 */
 	public void harvest(BeanField _beanField) {
-		Card temp = _beanField.pop(); // Get a reference card to read beanometer, read next comment
-		_beanField.push(temp);
 		
-		for(int i = 0; i < temp.getBeanometer().size(); i++){
-			// Do we want to store beanometer in each card instead of storing one for each card type?
-			if((_beanField.listOfCards.size()) < temp.getBeanometer().get(i).getCardsNecessary() && i > 0){ // if harvested cards have any value
-				for(int u = 0; u < temp.getBeanometer().get(i-1).getProfit(); u++){ // loop for profit
-					treasury.push(_beanField.pop()); // add the cards to treasury
+		if (_beanField != null && _beanField.getListOfCards().size() > 0){
+			Card temp = _beanField.pop(); // Get a reference card to read beanometer, read next comment
+			_beanField.push(temp);
+			
+			for(int i = 0; i < temp.getBeanometer().size(); i++){
+				// Do we want to store beanometer in each card instead of storing one for each card type?
+				if((_beanField.listOfCards.size()) < temp.getBeanometer().get(i).getCardsNecessary() && i > 0){ // if harvested cards have any value
+					for(int u = 0; u < temp.getBeanometer().get(i-1).getProfit(); u++){ // loop for profit
+						treasury.push(_beanField.pop()); // add the cards to treasury
+					}
 				}
 			}
-		}
-		while(_beanField.listOfCards.size() > 0){ // if cards still left in the beanfield
-			_beanField.pop(); // these should be thrown to the discard pile
+			while(_beanField.listOfCards.size() > 0){ // if cards still left in the beanfield
+				_beanField.pop(); // these should be thrown to the discard pile
+			}
+			coins = treasury.listOfCards.size(); // the player has as many coins as he has cards in his treasury	
+		} else {
+			System.out.println("No harvest! Beanfiel is empty.");
 		}
 		
-		coins = treasury.listOfCards.size(); // the player has as many coins as he has cards in his treasury	
 	}
 
 	public void buyThirdField() {
@@ -98,16 +119,20 @@ public class Player {
 	// NO VALIDATION YET!
 	// Alternatively we could consider using reflections inside test classes
 	// http://tutorials.jenkov.com/java-reflection/private-fields-and-methods.html
-	public void setCoins(int _coin){
-		coins = _coin;
-	}
 	
 	public void addBeanField(BeanField _beanField){
-		beanFields.add(_beanField);
+		if(_beanField != null){
+			beanFields.add(_beanField);
+		}
+		
 	}
 	
 	public BeanField getBeanFieldById(int _id){
-		return beanFields.get(_id);
+		if(_id < beanFields.size()){
+			return beanFields.get(_id);
+		} else {
+			return null;
+		}
 	}
 	
 	public Pile getTradeArea(){
@@ -133,5 +158,10 @@ public class Player {
 
 	public Pile getTreasury() {
 		return treasury;
+	}
+
+	public void setPlayState(State playState) {
+		this.playState = playState;
+		
 	}
 }
