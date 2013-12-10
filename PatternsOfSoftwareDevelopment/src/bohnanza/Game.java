@@ -11,6 +11,7 @@ public class Game implements IGame {
 	private int minPlayers;
 	private int numOfBeanCards;
 	private List<Player> players;
+	private List<State> playStates;
 	private Player activePlayer;
 	private Pile drawPile;
 	private Pile discardPile;
@@ -29,11 +30,20 @@ public class Game implements IGame {
 
 	public void initialize(int numOfPlayers) 
 	{
+		// most of this should be done in GameFactory
 		maxPlayers = GameRules.MAXPLAYERS;
 		minPlayers = GameRules.MINPLAYERS;
 		numOfBeanCards = GameRules.NUMOFBEANCARDS;
 		drawDeckExhaust = GameRules.NUMOFDRAWDECKEXHAUST;
 		maxNumOfCardsInHand = GameRules.MAXNUMOFCARDSINHAND;
+		playStates = new ArrayList<State>();
+		
+		// PLANT, DRAWTRADEDONATE, PLANTTRADEDONATED, DRAWNEW, INACTIVE
+		playStates.add(new State.Plant());
+		playStates.add(new State.DrawTradeDonate());
+		playStates.add(new State.PlantTradedDonated());
+		playStates.add(new State.DrawNew());
+		playStates.add(new State.Inactive());
 		
 		players = new ArrayList<Player>();
 		for(int i = 0; i < numOfPlayers; i++)
@@ -71,10 +81,27 @@ public class Game implements IGame {
 		deck.push(card);
 	}
 	
+	public void nextPlayState(){
+		List<State> tempList = getPlayStates();
+		activePlayer.setPlayState(tempList.get((tempList.indexOf(activePlayer.getPlayState()) + 1) % tempList.size()));
+	}
+	
+	public List<State> getPlayStates(){
+		return playStates;
+	}
+	
 	/**
 	 * Walks through the Bohnanza game logic for current state.
 	 * 
 	 */
+	
+	public void Play(){
+		while(!activePlayer.isFinished()){
+			activePlayer.getPlayState().play();
+			nextPlayState();
+		}
+		
+	}
 	
 	/*
 	public void Play(){

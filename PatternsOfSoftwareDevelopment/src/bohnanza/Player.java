@@ -29,10 +29,9 @@ public class Player implements IPlayer{
 		hand 		= new Pile();
 		beanFields 	= new ArrayList<BeanField>();
 		tradeArea 	= new Pile();
-		playState 	= State.INACTIVE;
+		playState 	= null;
 		coins 		= 0;
 		aside 		= new Pile();
-				
 	}
 	
 	public void plant(BeanField _beanField) {
@@ -50,10 +49,14 @@ public class Player implements IPlayer{
 		
 	}
 
+	/*
 	public void nextState() {
+		State.
 		playState = State.values()[(playState.ordinal() + 1) % State.values().length]; // state++ % states length
 	}
-
+*/
+	
+	
 	/**
 	 * 
 	 * @param Player
@@ -161,8 +164,16 @@ public class Player implements IPlayer{
 		return tradeArea;
 	}
 	
+	public void setPlayState(State _state){
+		if(_state != null && _state instanceof State){
+			this.playState = _state;
+		} else {
+			System.out.println("State not changed");
+		}
+	}
+	
 	public State getPlayState(){
-		return playState;
+		return this.playState;
 	}
 	
 	public Pile getHand(){
@@ -181,9 +192,8 @@ public class Player implements IPlayer{
 	public Pile getTreasury() {
 		return treasury;
 	}
-
-	public void setPlayState(State playState) {
-		this.playState = playState;
-		
+	
+	public boolean isFinished(){
+		return playState instanceof State.Inactive;
 	}
 }

@@ -1,6 +1,11 @@
 package interfaces;
 
+import bohnanza.BeanometerEntry;
+
 public interface IBeanType {
 	
-	public void getBeanoMeter();
+	public BeanometerEntry[] getBeanometer();
+	public String getName();
+	public int getAmountInDeck();
+	
 }
