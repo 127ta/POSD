@@ -90,13 +90,13 @@ public class Player {
 			{
 				treasury.push(_beanField.pop());
 			}
+			while(_beanField.listOfCards.size() > 0){ // if cards still left in the beanfield
+				_beanField.pop(); // these should be thrown to the discard pile
+			}
 		} 
 		else 
 		{
 			System.out.println("No harvest possible! Beanfield is empty or does not contain enough cards to deliver profit.");
-		}
-		while(_beanField.listOfCards.size() > 0){ // if cards still left in the beanfield
-			_beanField.pop(); // these should be thrown to the discard pile
 		}
 		
 		// Update coins to reflect the new value of the entire treasury
@@ -106,7 +106,7 @@ public class Player {
 		
 		
 		
-		
+		// The old implementation (As from 9 december)
 		/*if (_beanField != null && _beanField.getListOfCards().size() > 0){
 			Card temp = _beanField.pop(); // Get a reference card to read beanometer, read next comment
 			_beanField.push(temp);
