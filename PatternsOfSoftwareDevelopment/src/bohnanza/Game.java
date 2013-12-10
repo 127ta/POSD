@@ -1,9 +1,11 @@
 package bohnanza;
 
+import interfaces.IGame;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game {
+public class Game implements IGame {
 
 	private int maxPlayers;
 	private int minPlayers;
@@ -37,7 +39,6 @@ public class Game {
 		for(int i = 0; i < numOfPlayers; i++)
 		{
 			players.add(new Player());
-			
 		}
 		
 		drawDeckShuffles = 0;

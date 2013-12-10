@@ -1,10 +1,11 @@
 package bohnanza;
 import bohnanza.Card;
+import interfaces.IPile;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pile {
+public class Pile implements IPile {
 
 	public List<Card> listOfCards;
 	private int maxNumOfCards;

@@ -1,5 +1,6 @@
 package bohnanza;
 import bohnanza.BeanType;
+// confirm this is the way we want to implement a subclass
 public class BeanField extends Pile {
 
 	private BeanType type;

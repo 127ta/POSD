@@ -125,8 +125,7 @@ public class Player implements IPlayer{
 			}
 			coins = treasury.listOfCards.size(); // the player has as many coins as he has cards in his treasury	
 		}*/
-		
-		
+
 	}
 
 	public void buyThirdField() {

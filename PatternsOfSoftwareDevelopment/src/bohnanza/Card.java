@@ -1,9 +1,11 @@
 package bohnanza;
 
+import interfaces.ICard;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Card {
+public class Card implements ICard {
 
 	private List<BeanometerEntry> beanometer;
 	private BeanType type;

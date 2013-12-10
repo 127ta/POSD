@@ -1,6 +1,8 @@
 package bohnanza;
 
-public class GameRules {
+import interfaces.IGameRules;
+
+public class GameRules implements IGameRules {
 
 	public static final int MAXPLAYERS = 7;
 	public static final int MINPLAYERS = 2;
