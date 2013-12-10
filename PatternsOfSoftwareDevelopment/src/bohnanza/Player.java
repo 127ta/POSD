@@ -2,8 +2,9 @@ package bohnanza;
 
 import java.util.ArrayList;
 import java.util.List;
+import interfaces.IPlayer;
 
-public class Player {
+public class Player implements IPlayer{
 
 	private static final Exception TypeError = null;
 	private String name;
