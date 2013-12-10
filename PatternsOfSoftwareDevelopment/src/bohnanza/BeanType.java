@@ -1,19 +1,21 @@
 package bohnanza;
+import java.util.List;
+
 import interfaces.IBeanType;
 
 public class BeanType implements IBeanType {
 	//COFFEE, WAX, BLUE, CHILLI, STINK, GREEN, SOY, BLACKEYED, RED, GARDEN, COCOA
 	private String name;
-	private BeanometerEntry[] beanometerValues;
+	private List<BeanometerEntry> beanometerValues;
 	private int amountInDeck;
 	
-	public BeanType(String _name, BeanometerEntry[] beanometerValues, int amountInDeck){
+	public BeanType(String _name, List<BeanometerEntry> beanometerValues, int amountInDeck){
 		this.name = _name;
 		this.beanometerValues = beanometerValues;
 		this.amountInDeck = amountInDeck;
 	}
 	
-	public BeanometerEntry[] getBeanometer(){
+	public List<BeanometerEntry> getBeanometer(){
 		return beanometerValues;
 	}
 	

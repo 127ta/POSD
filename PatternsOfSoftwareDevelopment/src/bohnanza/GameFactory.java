@@ -13,7 +13,6 @@ public class GameFactory implements IGameFactory {
 	
 	public GameFactory(){
 		game = new Game();
-		
 	}
 	
 }

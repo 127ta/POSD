@@ -20,13 +20,6 @@ public class Game implements IGame {
 	private int drawDeckShuffles;
 	private int maxNumOfCardsInHand;
 
-	/**
-	 * 
-	 * @param String
-	 */
-	public static void main(String args[]) {
-		throw new UnsupportedOperationException();
-	}
 
 	public void initialize(int numOfPlayers) 
 	{

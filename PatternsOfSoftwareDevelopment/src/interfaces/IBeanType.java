@@ -1,10 +1,11 @@
 package interfaces;
 
-import bohnanza.BeanometerEntry;
+import java.util.List;
 
+import bohnanza.BeanometerEntry;
 public interface IBeanType {
 	
-	public BeanometerEntry[] getBeanometer();
+	public List<BeanometerEntry> getBeanometer();
 	public String getName();
 	public int getAmountInDeck();
 	
