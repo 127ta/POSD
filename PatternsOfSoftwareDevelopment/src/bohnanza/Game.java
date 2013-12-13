@@ -19,6 +19,7 @@ public class Game implements IGame {
 	private int drawDeckExhaust;
 	private int drawDeckShuffles;
 	private int maxNumOfCardsInHand;
+	private boolean gameHasEnded;
 
 
 	public void initialize(int numOfPlayers) 
@@ -48,6 +49,7 @@ public class Game implements IGame {
 		drawPile = new Pile();
 		discardPile = new Pile();
 		deck = new Pile();
+		gameHasEnded = false;
 	}
 
 	/**
@@ -89,10 +91,20 @@ public class Game implements IGame {
 	 */
 	
 	public void Play(){
-		while(!activePlayer.isFinished()){
-			activePlayer.getPlayState().play();
-			nextPlayState();
+		activePlayer = (players.size() > 0) ? players.get(0) : null;
+		while(!gameHasEnded && activePlayer != null)
+		{
+			while(!activePlayer.isFinished())
+			{
+				activePlayer.getPlayState().play();
+				nextPlayState();
+			}
+			// Switch to the next player in the list
+			activePlayer = players.get((players.indexOf(activePlayer) + 1) % players.size());
+			// Set the new active players playstate to the first state in the list.
+			activePlayer.setPlayState(getPlayStates().get(0));
 		}
+		System.out.println("Game has ended!");
 		
 	}
 	
@@ -161,5 +173,6 @@ public class Game implements IGame {
 		
 		System.out.println(playState);
 		nextState();
-	} */
+		
+	}*/
 }

@@ -15,6 +15,7 @@ public abstract class State implements IState
 		@Override
 		public void play() {
 			System.out.println("Plant state");
+			System.console().readLine();
 			
 		}
 		
@@ -31,6 +32,7 @@ public abstract class State implements IState
 		@Override
 		public void play() {
 			System.out.println("DrawTradeDonate state");
+			System.console().readLine();
 			
 		}
 		
@@ -47,6 +49,7 @@ public abstract class State implements IState
 		@Override
 		public void play() {
 			System.out.println("PlantTradedDonated state");
+			System.console().readLine();
 			
 		}
 		
@@ -63,6 +66,7 @@ public abstract class State implements IState
 		@Override
 		public void play() {
 			System.out.println("DrawNew state");
+			System.console().readLine();
 			
 		}
 		
@@ -79,6 +83,7 @@ public abstract class State implements IState
 		@Override
 		public void play() {
 			System.out.println("Inactive state");
+			System.console().readLine();
 			
 		}
 		
