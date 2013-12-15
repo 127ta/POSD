@@ -20,35 +20,36 @@ public class Game implements IGame {
 	private int drawDeckShuffles;
 	private int maxNumOfCardsInHand;
 	private boolean gameHasEnded;
+	private GameRules rules;
+	
+	public Game(List<Player> players, List<State> playStates, Pile deck, GameRules rules){
+		this.players = players;
+		this.playStates = playStates;
+		this.deck = deck;
+		this.rules = rules;
+		initialize(players.size());
+	}
 
 
 	public void initialize(int numOfPlayers) 
 	{
 		// most of this should be done in GameFactory
-		maxPlayers = GameRules.MAXPLAYERS;
-		minPlayers = GameRules.MINPLAYERS;
-		numOfBeanCards = GameRules.NUMOFBEANCARDS;
-		drawDeckExhaust = GameRules.NUMOFDRAWDECKEXHAUST;
-		maxNumOfCardsInHand = GameRules.MAXNUMOFCARDSINHAND;
-		playStates = new ArrayList<State>();
-		
-		// PLANT, DRAWTRADEDONATE, PLANTTRADEDONATED, DRAWNEW, INACTIVE
-		playStates.add(new State.Plant());
-		playStates.add(new State.DrawTradeDonate());
-		playStates.add(new State.PlantTradedDonated());
-		playStates.add(new State.DrawNew());
-		playStates.add(new State.Inactive());
-		
-		players = new ArrayList<Player>();
-		for(int i = 0; i < numOfPlayers; i++)
-		{
-			players.add(new Player());
-		}
-		
+		maxPlayers = rules.MAXPLAYERS;
+		minPlayers = rules.MINPLAYERS;
+		numOfBeanCards = rules.NUMOFBEANCARDS;
+		drawDeckExhaust = rules.NUMOFDRAWDECKEXHAUST;
+		maxNumOfCardsInHand = rules.MAXNUMOFCARDSINHAND;
 		drawDeckShuffles = 0;
+		
+		deal();
 		drawPile = new Pile();
 		discardPile = new Pile();
-		deck = new Pile();
+		
+		// put leftover cards from deck to drawpile
+		while(deck.getListOfCards().size() > 0){
+			drawPile.push(deck.pop());
+		}
+		
 		gameHasEnded = false;
 	}
 
@@ -71,6 +72,12 @@ public class Game implements IGame {
 	{
 		return players;
 	}
+	
+	public Pile getDrawPile(){
+		// convert to singleton
+		return drawPile;
+	}
+	
 	public void pushToDeck(Card card)
 	{
 		deck.push(card);

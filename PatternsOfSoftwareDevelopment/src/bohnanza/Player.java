@@ -23,8 +23,18 @@ public class Player implements IPlayer{
 	 * @param BeanField
 	 */
 	public Player(){
-		name 		= "unnamed";
-		id 			= -1;
+		init();
+		this.name 	= "unnamed";
+		this.id		= -1;
+	}
+	
+	public Player(String name, int id){
+		init();
+		this.name 	= name;
+		this.id 	= id;
+	}
+	
+	private void init(){
 		treasury 	= new Pile();
 		hand 		= new Pile();
 		beanFields 	= new ArrayList<BeanField>();
