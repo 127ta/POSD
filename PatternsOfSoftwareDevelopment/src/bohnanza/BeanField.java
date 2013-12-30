@@ -12,11 +12,18 @@ public class BeanField extends Pile {
 		if(amountOfCards > 0) // If there are cards
 		{
 			Card harvestCard = listOfCards.get(0);
-			for(int i = 0; i < harvestCard.getBeanType().getBeanometer().size(); i++){
+			/*for(int i = 0; i < harvestCard.getBeanType().getBeanometer().size(); i++){
 				if(amountOfCards < harvestCard.getBeanType().getBeanometer().get(i).getCardsNecessary() && i > 0){ // if harvested cards have any value
 					for(int u = 0; u < harvestCard.getBeanType().getBeanometer().get(i-1).getProfit(); u++){ // loop for profit
 						harvestValue++;
 					}
+				}
+			}*/
+			
+			harvestValue = 0;
+			for(int i = 0; i < harvestCard.getBeanType().getBeanometer().size(); i++){
+				if(amountOfCards >= harvestCard.getBeanType().getBeanometer().get(i).getCardsNecessary()){
+					harvestValue = harvestCard.getBeanType().getBeanometer().get(i).getProfit();
 				}
 			}
 		}

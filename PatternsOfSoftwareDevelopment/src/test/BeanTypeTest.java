@@ -15,6 +15,10 @@ public class BeanTypeTest {
 	@Test
 	public void test() {
 		List<BeanometerEntry> tempList = new ArrayList<BeanometerEntry>();
+		tempList.add(new BeanometerEntry(1, 1));
+		tempList.add(new BeanometerEntry(2, 2));
+		tempList.add(new BeanometerEntry(3, 3));
+		tempList.add(new BeanometerEntry(4, 4));
 		BeanType temp = new BeanType("a", tempList, 10);
 	}
 

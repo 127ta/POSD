@@ -1,4 +1,10 @@
 package test;
+import interfaces.IBeanType;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import bohnanza.*;
 import static org.junit.Assert.*;
 
@@ -18,6 +24,7 @@ public class BeanFieldTest {
 	BeanField redField;
 	BeanField gardenField;
 	BeanField cocoaField;
+	List<IBeanType> beanTypes;
 	
 	@Before
 	public void setUp() throws Exception 
@@ -33,19 +40,35 @@ public class BeanFieldTest {
 		redField = new BeanField();
 		gardenField = new BeanField();
 		cocoaField = new BeanField();
+		
+		beanTypes = new ArrayList<IBeanType>();
+		beanTypes.add(new BeanType("Coffee", 	 Arrays.asList(new BeanometerEntry(4,1), new BeanometerEntry(7,2), new BeanometerEntry(10,3), new BeanometerEntry(12,4)),24));
+		beanTypes.add(new BeanType("Wax", 		 Arrays.asList(new BeanometerEntry(4,1), new BeanometerEntry(7,2), new BeanometerEntry(9,3), new BeanometerEntry(11,4)),22));
+		beanTypes.add(new BeanType("Blue", 		 Arrays.asList(new BeanometerEntry(4,1), new BeanometerEntry(6,2), new BeanometerEntry(8,3), new BeanometerEntry(10,4)),20));
+		beanTypes.add(new BeanType("Chili", 	 Arrays.asList(new BeanometerEntry(3,1), new BeanometerEntry(6,2), new BeanometerEntry(8,3), new BeanometerEntry(9,4)),18));
+		beanTypes.add(new BeanType("Stink", 	 Arrays.asList(new BeanometerEntry(3,1), new BeanometerEntry(5,2), new BeanometerEntry(7,3), new BeanometerEntry(8,4)),16));
+		beanTypes.add(new BeanType("Green", 	 Arrays.asList(new BeanometerEntry(3,1), new BeanometerEntry(5,2), new BeanometerEntry(6,3), new BeanometerEntry(7,4)),14));
+		beanTypes.add(new BeanType("Soy", 		 Arrays.asList(new BeanometerEntry(2,1), new BeanometerEntry(4,2), new BeanometerEntry(6,3), new BeanometerEntry(7,4)),12));
+		beanTypes.add(new BeanType("Black-Eyed", Arrays.asList(new BeanometerEntry(2,1), new BeanometerEntry(4,2), new BeanometerEntry(5,3), new BeanometerEntry(6,4)),10));
+		beanTypes.add(new BeanType("Red", 		 Arrays.asList(new BeanometerEntry(2,1), new BeanometerEntry(3,2), new BeanometerEntry(4,3), new BeanometerEntry(5,4)),8));
+		beanTypes.add(new BeanType("Garden", 	 Arrays.asList(new BeanometerEntry(2,2), new BeanometerEntry(3,3)),6));
+		beanTypes.add(new BeanType("Cacao", 	 Arrays.asList(new BeanometerEntry(2,2), new BeanometerEntry(3,3), new BeanometerEntry(4,4)),4));
+		
 		for(int i = 0; i < 5; i++)
 		{
-			coffeeField.push(new Card(BeanType.COFFEE));
-			waxField.push(new Card(BeanType.WAX));
-			blueField.push(new Card(BeanType.BLUE));
-			chilliField.push(new Card(BeanType.CHILLI));
-			stinkField.push(new Card(BeanType.STINK));
-			greenField.push(new Card(BeanType.GREEN));
-			soyField.push(new Card(BeanType.SOY));
-			blackeyedField.push(new Card(BeanType.BLACKEYED));
-			redField.push(new Card(BeanType.RED));
-			gardenField.push(new Card(BeanType.GARDEN));
-			cocoaField.push(new Card(BeanType.COCOA));
+			// Have to add boundary checking for the amount of cards
+			coffeeField.push(new Card(beanTypes.get(0)));
+			waxField.push(new Card(beanTypes.get(1)));
+			blueField.push(new Card(beanTypes.get(2)));
+			chilliField.push(new Card(beanTypes.get(3)));
+			stinkField.push(new Card(beanTypes.get(4)));
+			greenField.push(new Card(beanTypes.get(5)));
+			soyField.push(new Card(beanTypes.get(6)));
+			blackeyedField.push(new Card(beanTypes.get(7)));
+			redField.push(new Card(beanTypes.get(8)));
+			gardenField.push(new Card(beanTypes.get(9)));
+			// this should not be possible
+			cocoaField.push(new Card(beanTypes.get(10)));
 		}
 	}
 
@@ -60,7 +83,7 @@ public class BeanFieldTest {
 		assertEquals("soyField.getHarvestValue()", 2, soyField.getHarvestValue());
 		assertEquals("blackeyedField.getHarvestValue()", 3, blackeyedField.getHarvestValue());
 		assertEquals("redField.getHarvestValue()", 4, redField.getHarvestValue());
-		assertEquals("gardenField.getHarvestValue()", 4, gardenField.getHarvestValue());
+		assertEquals("gardenField.getHarvestValue()", 3, gardenField.getHarvestValue());
 		assertEquals("cocoaField.getHarvestValue()", 4, cocoaField.getHarvestValue());
 		
 	}
