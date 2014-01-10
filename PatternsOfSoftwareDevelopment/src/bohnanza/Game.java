@@ -21,17 +21,31 @@ public class Game implements IGame {
 	private int maxNumOfCardsInHand;
 	private boolean gameHasEnded;
 	private GameRules rules;
+	private static Game gameInstance;
 	
-	public Game(List<Player> players, List<State> playStates, Pile deck, GameRules rules){
+	/*public Game(List<Player> players, List<State> playStates, Pile deck, GameRules rules){
 		this.players = players;
 		this.playStates = playStates;
 		this.deck = deck;
 		this.rules = rules;
 		initialize(players.size());
+	}*/
+	private Game()
+	{
+		
+	}
+	
+	public static Game getInstance()
+	{
+		if(gameInstance == null)
+		{
+			gameInstance = new Game();
+		}
+		return gameInstance;
 	}
 
 
-	public void initialize(int numOfPlayers) 
+	public void initialize() 
 	{
 		// most of this should be done in GameFactory
 		maxPlayers = rules.MAXPLAYERS;
@@ -52,6 +66,23 @@ public class Game implements IGame {
 		
 		gameHasEnded = false;
 	}
+	public void setPlayers(List<Player> players)
+	{
+		this.players = players;
+	}
+	public void setPlayStates(List<State> playStates)
+	{
+		this.playStates = playStates;
+	}
+	public void setDeck(Pile deck)
+	{
+		this.deck = deck;
+	}
+	public void setRules(GameRules rules)
+	{
+		this.rules = rules;
+	}
+	
 
 	/**
 	 * 
