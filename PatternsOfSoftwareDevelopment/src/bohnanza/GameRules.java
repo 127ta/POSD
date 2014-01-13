@@ -11,5 +11,8 @@ public class GameRules implements IGameRules {
 	public static final int NUMOFDRAWDECKEXHAUST = 3;
 	public static final int BEANFREQUENCY = 1000;
 	public static final int MAXNUMOFCARDSINHAND = 5;
-
+	
+	public void strategicMethod(){
+		// Implementation for the strategy pattern
+	}
 }

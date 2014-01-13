@@ -44,7 +44,7 @@ public class Game implements IGame {
 		return gameInstance;
 	}
 
-
+	/*
 	public void initialize() 
 	{
 		// most of this should be done in GameFactory
@@ -66,6 +66,7 @@ public class Game implements IGame {
 		
 		gameHasEnded = false;
 	}
+	*/
 	public void setPlayers(List<Player> players)
 	{
 		this.players = players;
@@ -143,7 +144,6 @@ public class Game implements IGame {
 			activePlayer.setPlayState(getPlayStates().get(0));
 		}
 		System.out.println("Game has ended!");
-		
 	}
 	
 	/*
