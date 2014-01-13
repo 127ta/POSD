@@ -5,14 +5,14 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import bohnanza.GameFactory;
+import bohnanza.GameBuilder;
 
 public class GameFactoryTest {
-	GameFactory gm;
+	GameBuilder gm;
 	
 	@Before
 	public void setup(){
-		gm = new GameFactory();
+		gm = new GameBuilder();
 	}
 
 	@Test

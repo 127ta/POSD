@@ -6,10 +6,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import interfaces.IGameFactory;
+import interfaces.IGameBuilder;
 import interfaces.IBeanType;
 
-public class GameFactory implements IGameFactory {
+public class GameBuilder implements IGameBuilder {
 
 	private Game game;
 	private List<Player> players;
@@ -18,7 +18,7 @@ public class GameFactory implements IGameFactory {
 	private List<IBeanType> beanTypes;
 	private GameRules rules;
 
-	public GameFactory(){
+	public GameBuilder(){
 		//InitializeGame(); commented out for testing purposes
 		players = new ArrayList<Player>();
 		playStates = new ArrayList<State>();
@@ -70,7 +70,12 @@ public class GameFactory implements IGameFactory {
 		beanTypes.add(new BeanType("Garden", 	 Arrays.asList(new BeanometerEntry(2,2), new BeanometerEntry(3,3)),6));
 		beanTypes.add(new BeanType("Cacao", 	 Arrays.asList(new BeanometerEntry(2,2), new BeanometerEntry(3,3), new BeanometerEntry(4,4)),4));
 		
-		game = new Game(players, playStates, getDeck(), rules);
+		//game = new Game(players, playStates, getDeck(), rules);
+		Game.getInstance().setPlayers(players);
+		Game.getInstance().setPlayStates(playStates);
+		Game.getInstance().setDeck(getDeck());
+		Game.getInstance().setRules(rules);
+		
 	}
 
 	public void addPlayer(String name, int id){
